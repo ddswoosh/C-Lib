@@ -13,7 +13,6 @@ class List {
     public:
         List();
         ~List();
-        
         void Append(int);
         void Insert(int, int);
         void DeleteIdx(int);
