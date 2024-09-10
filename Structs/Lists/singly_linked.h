@@ -1,24 +1,24 @@
 #ifndef SINGLY_LINKED
 #define SINGLY_LINKED
 
-struct Node {
+struct SinglyNode {
     int val;
-    Node* next;
+    SinglyNode* next;
 };
 
-class List {
-    public: Node* head;
+class SinglyList {
+    public: SinglyNode* head;
     private: int length;
 
     public:
-        List();
-        ~List();
+        SinglyList();
+        ~SinglyList();
         void Append(int);
         void Insert(int, int);
         void DeleteIdx(int);
         void DeleteVal(int);
-        Node* SearchVal(int);
-        Node* SearchIdx(int);
+        SinglyNode* SearchVal(int);
+        SinglyNode* SearchIdx(int);
         void Show();
         int Length();
 };

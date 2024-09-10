@@ -4,18 +4,18 @@
 // Header includes
 #include "singly_linked.h"
 
-List::List() : head(nullptr), length(0) {}
-List::~List() {delete this;}
+SinglyList::SinglyList() : head(nullptr), length(0) {}
+SinglyList::~SinglyList() {}
 
-void List::Append(int val) {
-    Node* node = new Node;
+void SinglyList::Append(int val) {
+    SinglyNode* node = new SinglyNode;
     node->val = val;
     node->next = nullptr;
     
     if (head == nullptr) {
         head = node;
     } else {
-        Node* temp = head;
+        SinglyNode* temp = head;
 
         while (temp->next != nullptr) {
             temp = temp->next;
@@ -25,13 +25,13 @@ void List::Append(int val) {
     ++length;   
 }
 
-void List::Insert(int val, int idx) {
+void SinglyList::Insert(int val, int idx) {
     if (idx < 0) {
         throw std::out_of_range("Insertion index is before the head node.");
-    } else if (idx > length - 1) {
+    } else if (idx >= length) {
         throw std::out_of_range("Insertion index larger than list length, use append instead.");
     }
-    Node* node = new Node;
+    SinglyNode* node = new SinglyNode;
     node->val = val;
     node->next = nullptr;
     
@@ -41,7 +41,7 @@ void List::Insert(int val, int idx) {
         node->next = head;
         head = node;
     } else {
-        Node* temp = head;
+        SinglyNode* temp = head;
 
         int i = 0;
         while (i < idx - 1) {
@@ -54,13 +54,13 @@ void List::Insert(int val, int idx) {
     ++length;   
 }
 
-void List::DeleteIdx(int idx) {
+void SinglyList::DeleteIdx(int idx) {
     if (idx < 0) {
         throw std::out_of_range("Deletion index is before the head node.");
     } else if (idx > length - 1) {
         throw std::out_of_range("Deletion index larger than list length. Are you looking to delete a value? Use DeleteVal.");       
     } else {
-        Node* temp = head;
+        SinglyNode* temp = head;
         
         int i = 0;
         while (i < idx - 1) {
@@ -72,11 +72,11 @@ void List::DeleteIdx(int idx) {
     --length;
 }
 
-void List::DeleteVal(int val) {
+void SinglyList::DeleteVal(int val) {
     if (!length) {
         throw std::out_of_range("There are no nodes to delete.");
     } else {
-        Node* temp = head;
+        SinglyNode* temp = head;
         bool success = false;
 
         int i = 0;
@@ -84,7 +84,7 @@ void List::DeleteVal(int val) {
             if (temp->next->val == val) {
                 temp->next = temp->next->next;
                 success = true;
-                std::cout << "Deleted value at idx " << i;
+                std::cout << "Deleted value at idx " << i + 1;
                 
                 break;
             }
@@ -98,13 +98,13 @@ void List::DeleteVal(int val) {
     --length;
 }
 
-Node* List::SearchIdx(int idx) {
+SinglyNode* SinglyList::SearchIdx(int idx) {
     if (idx < 0) {
-        throw std::out_of_range("Deletion index is before the head node.");
+        throw std::out_of_range("Search index is before the head node.");
     } else if (idx > length - 1) {
-        throw std::out_of_range("Deletion index larger than list length. Are you looking to delete a value? Use DeleteVal.");      
+        throw std::out_of_range("Search index larger than list length. Are you looking to delete a value? Use DeleteVal.");      
     } else {
-        Node* temp = head;
+        SinglyNode* temp = head;
         
         int i = 0;
         while (i != idx) {
@@ -115,8 +115,8 @@ Node* List::SearchIdx(int idx) {
     }
 }
 
-Node* List::SearchVal(int val) {
-    Node* temp = head;
+SinglyNode* SinglyList::SearchVal(int val) {
+    SinglyNode* temp = head;
     bool success = false;
 
     int i = 0;
@@ -130,23 +130,21 @@ Node* List::SearchVal(int val) {
         temp = temp->next;
         ++i;
     }
-
     if (!success) {
         std::cout << "Node value was not found within this list.";
     }
     return temp;
 }
 
-void List::Show() {
-    Node* temp = head;
+void SinglyList::Show() {
+    SinglyNode* temp = head;
 
-    int i = 0;
-    while (i < length) {
+    while (temp != nullptr) {
         std::cout << temp->val << "-->";
         temp = temp->next;
     }
 }
 
-int List::Length() {
+int SinglyList::Length() {
     return length;
 }
