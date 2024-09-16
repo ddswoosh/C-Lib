@@ -10,8 +10,7 @@ DoublyList::~DoublyList() {}
 void DoublyList::Append(int val) {
     DoublyNode* node = new DoublyNode;
     node->val = val;
-    node->next = nullptr;
-    node->prev = nullptr;
+    node->next, node->prev = nullptr;
 
     if (head == nullptr) {
         node->prev = head;
@@ -38,8 +37,7 @@ void DoublyList::Insert(int val, int idx) {
     }
     DoublyNode* node = new DoublyNode;
     node->val = val;
-    node->next = nullptr;
-    node->prev = nullptr;
+    node->next, node->prev = nullptr;
     
     if (head == nullptr) {
         node->prev = head;
